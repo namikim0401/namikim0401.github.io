@@ -242,6 +242,8 @@
   .preview-section:last-of-type{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
   .preview-section h4{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--bolt); margin:0 0 12px; }
   .preview-section .sec-thumb{ width:100%; border-radius:4px; overflow:hidden; margin-bottom:14px; border:1px solid var(--line); }
+  .preview-section .sec-thumb-row{ display:flex; gap:10px; margin-bottom:14px; }
+  .preview-section .sec-thumb-row img{ flex:1; width:50%; border-radius:4px; border:1px solid var(--line); display:block; }
   .preview-section .sec-thumb img{ width:100%; display:block; }
   .preview-close{
     position:absolute; top:18px; right:18px;
@@ -567,6 +569,11 @@
           img: 'images/munch/home-feed.png'
         },
         {
+          heading: 'Browsing & saving spots',
+          body: 'Swiping through results shows one card at a time — restaurant photos, price, rating, and a straight line to Yelp — with undo/redo so a reject or a favorite is never final.',
+          imgs: ['images/munch/swipe-binge.png', 'images/munch/swipe-wingstop.png']
+        },
+        {
           heading: 'Creating an account',
           body: 'Sign-up collects email, phone, and password, then verifies the phone number with a 4-digit SMS code before continuing into location and cuisine setup.',
           img: 'images/munch/create-account-form.png'
@@ -675,6 +682,7 @@
         <div class="preview-section">
           <h4>${s.heading}</h4>
           ${s.img ? `<div class="sec-thumb"><img src="${s.img}" alt="${s.heading}"></div>` : ''}
+          ${s.imgs ? `<div class="sec-thumb-row">${s.imgs.map(i => `<img src="${i}" alt="${s.heading}">`).join('')}</div>` : ''}
           <p>${s.body}</p>
           ${renderToolIcons(s.toolIcons)}
         </div>
