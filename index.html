@@ -242,43 +242,6 @@
   .preview-section:last-of-type{ border-bottom:none; margin-bottom:0; padding-bottom:0; }
   .preview-section h4{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--bolt); margin:0 0 12px; }
   .preview-section .sec-thumb{ width:100%; border-radius:4px; overflow:hidden; margin-bottom:14px; border:1px solid var(--line); }
-  .phone-stage{
-    background:radial-gradient(120% 90% at 50% 6%, #3c3c3f, #0a0a0b 72%);
-    border-radius:22px;
-    padding:36px 24px;
-    margin-bottom:14px;
-  }
-  .preview-section .sec-thumb.phone-frame{
-    position:relative;
-    width:100%;
-    max-width:220px;
-    aspect-ratio:450/920;
-    margin:0 auto;
-    background:none;
-    border:none;
-    border-radius:0;
-    padding:0;
-    box-shadow:0 20px 40px -14px rgba(0,0,0,.7);
-  }
-  .preview-section .sec-thumb.phone-frame .phone-screen{ position:static; border-radius:0; overflow:visible; background:none; }
-  .preview-section .sec-thumb.phone-frame .phone-shot{
-    position:absolute;
-    inset:0;
-    width:100%; height:100%;
-    object-fit:cover;
-    display:block;
-    -webkit-mask-image:url(images/ui/iphone-hole-mask.png);
-    mask-image:url(images/ui/iphone-hole-mask.png);
-    -webkit-mask-size:100% 100%;
-    mask-size:100% 100%;
-    -webkit-mask-repeat:no-repeat;
-    mask-repeat:no-repeat;
-  }
-  .preview-section .sec-thumb.phone-frame .phone-chrome{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    pointer-events:none;
-  }
   .preview-section .sec-thumb img{ width:100%; display:block; }
   .preview-close{
     position:absolute; top:18px; right:18px;
@@ -601,14 +564,12 @@
         {
           heading: 'What it does',
           body: 'Munch is a mobile food-discovery app: create an account, verify by phone, drop a pin on your location, pick your favorite cuisines, then browse nearby spots by category, save favorites, and revisit your search history. Built with React Native (Expo) and TypeScript alongside a teammate.',
-          img: 'images/munch/home-feed.png',
-          phoneFrame: true
+          img: 'images/munch/home-feed.png'
         },
         {
           heading: 'Creating an account',
           body: 'Sign-up collects email, phone, and password, then verifies the phone number with a 4-digit SMS code before continuing into location and cuisine setup.',
-          img: 'images/munch/create-account-form.png',
-          phoneFrame: true
+          img: 'images/munch/create-account-form.png'
         },
         {
           heading: 'Full flow',
@@ -618,8 +579,7 @@
         {
           heading: 'Saving & revisiting picks',
           body: 'The History tab surfaces everything a user has swiped on, with a clear reject and favorite split so it doubles as a running shortlist of places worth going back to, not just a log.',
-          img: 'images/munch/history.png',
-          phoneFrame: true
+          img: 'images/munch/history.png'
         },
         {
           heading: 'My contribution',
@@ -714,10 +674,7 @@
       body += d.sections.map(s => `
         <div class="preview-section">
           <h4>${s.heading}</h4>
-          ${s.img ? (s.phoneFrame
-            ? `<div class="phone-stage"><div class="sec-thumb phone-frame"><div class="phone-screen"><img class="phone-shot" src="${s.img}" alt="${s.heading}"><img class="phone-chrome" src="images/ui/iphone-chrome.png" alt=""></div></div></div>`
-            : `<div class="sec-thumb"><img src="${s.img}" alt="${s.heading}"></div>`
-          ) : ''}
+          ${s.img ? `<div class="sec-thumb"><img src="${s.img}" alt="${s.heading}"></div>` : ''}
           <p>${s.body}</p>
           ${renderToolIcons(s.toolIcons)}
         </div>
