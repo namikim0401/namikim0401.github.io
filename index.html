@@ -243,8 +243,22 @@
   .preview-section h4{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--bolt); margin:0 0 12px; }
   .preview-section .sec-thumb{ width:100%; border-radius:4px; overflow:hidden; margin-bottom:14px; border:1px solid var(--line); }
   .preview-section .sec-thumb-row{ display:flex; gap:10px; margin-bottom:14px; }
+  .preview-section .sec-thumb-grid{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:14px; }
+  .preview-section .sec-thumb-grid figure{ width:calc(50% - 8px); box-sizing:border-box; margin:0; }
+  .preview-section .sec-thumb-grid img{ width:100%; box-sizing:border-box; display:block; }
+  .preview-section .sec-thumb-grid.app-frame img{ border:6px solid #2f3624; border-radius:18px; box-shadow:0 14px 28px rgba(47,54,34,.2); }
+  .preview-section .sec-thumb-grid figcaption{ margin-top:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); text-align:center; }
+  @media (max-width:520px){ .preview-section .sec-thumb-grid figure{ width:100%; } }
   .preview-section .sec-thumb-row img{ flex:1; width:50%; border-radius:4px; border:1px solid var(--line); display:block; }
   .preview-section .sec-thumb img{ width:100%; display:block; }
+  .preview-section .sec-thumb.app-frame, .preview-section .sec-thumb.figma-frame{ border:none; border-radius:0; overflow:visible; background:none; }
+  .preview-section .sec-thumb.app-frame img{ width:100%; box-sizing:border-box; border:7px solid #2f3624; border-radius:24px; box-shadow:0 16px 34px rgba(47,54,34,.2); }
+  .preview-section .sec-thumb-row.app-frame img{ box-sizing:border-box; border:6px solid #2f3624; border-radius:18px; box-shadow:0 14px 28px rgba(47,54,34,.2); }
+  .preview-section .sec-thumb.figma-frame img{ width:100%; box-sizing:border-box; border:2px dashed #a19c8f; border-radius:24px; }
+  .preview-section .sec-thumb-row.figma-frame img{ box-sizing:border-box; border:2px dashed #a19c8f; border-radius:18px; }
+  .preview-section .frame-tag{ display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-bottom:10px; }
+  .preview-section .frame-tag.is-figma{ background:#efece4; color:#8a7f5a; }
+  .preview-section .frame-tag.is-live{ background:#e7ede1; color:#2f3624; }
   .preview-close{
     position:absolute; top:18px; right:18px;
     width:32px; height:32px;
@@ -270,6 +284,29 @@
     border-radius:24px;
   }
   .preview-link:hover{ background:var(--bolt); }
+  .preview-link-top{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:16px 26px;
+    margin:18px 0 8px;
+    background:var(--bolt);
+    color:var(--paper);
+    font-size:16px; font-weight:900;
+    border-radius:28px;
+    box-shadow:0 10px 24px -8px rgba(255,59,31,.55);
+    animation:pulse-link 1.8s ease-in-out infinite;
+  }
+  .preview-link-top:hover{ background:var(--ink); box-shadow:0 10px 24px -8px rgba(12,12,11,.4); }
+  .preview-link-top .arrow-ico{ font-size:18px; }
+  @keyframes pulse-link{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.035); } }
+  .preview-links-secondary{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 22px; }
+  .preview-links-secondary a{
+    font-size:12px; font-weight:700;
+    font-family:'IBM Plex Mono', monospace;
+    padding:8px 14px;
+    border:1.5px solid var(--ink);
+    border-radius:18px;
+  }
+  .preview-links-secondary a:hover{ background:var(--ink); color:var(--paper); }
 </style>
 </head>
 <body>
@@ -303,14 +340,14 @@
   <section id="work">
     <div class="sec-label">
       <h2 class="mono">SELECTED WORK</h2>
-      <span class="count mono">06</span>
+      <span class="count mono">05</span>
     </div>
     <div class="work-list">
 
-      <a class="proj-row" data-img="anchor-thumb.jpg">
+      <a class="proj-row" data-img="anchor-thumb.jpg" data-preview="anchor" href="#">
         <span class="num">01</span>
         <span class="title">Anchor — Steady the Day</span>
-        <span class="tags"><span>UX RESEARCH</span><span>REACT</span></span>
+        <span class="tags"><span>USER INTERFACE DESIGN AND DEVELOPMENT</span></span>
         <span class="arrow">→</span>
       </a>
 
@@ -321,31 +358,24 @@
         <span class="arrow">→</span>
       </a>
 
-      <a class="proj-row" data-img="todo-thumb.jpg">
-        <span class="num">03</span>
-        <span class="title">Full-Stack Todo App</span>
-        <span class="tags"><span>NODE.JS</span><span>MONGODB</span></span>
-        <span class="arrow">→</span>
-      </a>
-
       <a class="proj-row" data-img="nuo-thumb.jpg" data-preview="nuo" href="#">
-        <span class="num">04</span>
+        <span class="num">03</span>
         <span class="title">Nuo — Futurist Lamp</span>
         <span class="tags"><span>PRODUCT DESIGN</span></span>
         <span class="arrow">→</span>
       </a>
 
       <a class="proj-row" data-img="dots-thumb.jpg" data-preview="dots" href="#">
-        <span class="num">05</span>
+        <span class="num">04</span>
         <span class="title">Dots</span>
-        <span class="tags"><span>UX</span><span>COGSCI 112</span></span>
+        <span class="tags"><span>UX RESEARCH</span></span>
         <span class="arrow">→</span>
       </a>
 
       <a class="proj-row" data-img="consumerism-thumb.jpg" data-preview="consumerism" href="#">
-        <span class="num">06</span>
+        <span class="num">05</span>
         <span class="title">Consumerism User Research</span>
-        <span class="tags"><span>UGBA190D</span></span>
+        <span class="tags"><span>DESIGN THINKING IN BUSINESS</span></span>
         <span class="arrow">→</span>
       </a>
 
@@ -471,9 +501,8 @@
 
   // command palette
   const cmdkItems = [
-    { label: 'Anchor — Steady the Day', tag: 'project', href: '#work' },
+    { label: 'Anchor — Steady the Day', tag: 'project', preview: 'anchor' },
     { label: 'Munch — Food Search App', tag: 'project', preview: 'munch' },
-    { label: 'Full-Stack Todo App', tag: 'project', href: '#work' },
     { label: 'Nuo — Futurist Lamp', tag: 'project', preview: 'nuo' },
     { label: 'Dots', tag: 'project', preview: 'dots' },
     { label: 'Consumerism User Research', tag: 'project', preview: 'consumerism' },
@@ -647,12 +676,40 @@
     consumerism: {
       eyebrow: 'UX RESEARCH · UGBA190D',
       title: 'Consumerism — designing a pause before the purchase',
-      role: 'Ran field observations and interviews on student online-shopping habits, helped synthesize the findings into a persona and journey map, and contributed to evolving the team\'s prototype through pitch feedback.',
+      img: 'images/consumerism/purchase-decision-assistant.png',
+      role: 'Ran field observations and interviews on student online-shopping habits, helped synthesize the findings into an affinity map, persona, and journey map, and contributed to evolving the team\'s prototype through user testing and pitch feedback.',
       sections: [
         {
+          heading: 'Observation — context research',
+          body: 'We opened with STEEP+ research to map the forces around student shopping before talking to anyone: tariffs and price pressure pushing some spending back offline, fast fashion\'s environmental cost, and a "retail therapy" pattern in the psychology literature — people shopping to self-soothe stress, then regretting it, then shopping again.'
+        },
+        {
           heading: 'Observation — research methods',
-          body: 'Before designing anything, we ran STEEP+ research to map the broader context around online shopping, then went into the field: structured observation sessions watching students shop live, followed by ethnographic interviews to unpack the reasoning behind what we saw.',
+          body: 'From there we went into the field: structured observation sessions watching students shop live over screen-share, followed by ethnographic interviews to unpack the reasoning behind what we saw.',
           img: 'images/consumerism/field-observation.png'
+        },
+        {
+          heading: 'Observation — voices from the field',
+          body: 'One ethnographic interview stuck with the team: a student who defaults to Amazon "because it\'s fast and easy," admits she "sometimes buys impulsively and regrets it later, but just returns it if I can" — but slows way down for anything long-term, cross-referencing TikTok and reviews from people her own age before she\'ll commit. The same person, two totally different decision speeds depending on the stakes.'
+        },
+        {
+          heading: 'Insights — affinity mapping',
+          body: 'We clustered everything — observations, interviews, survey data — into affinity themes. Two ended up shaping the whole direction: "Pause Before Purchase" (students build their own manual speed bumps to avoid impulse buys) and "Online for Convenience, In-Person for Confidence" (they still cross-check quality and fit in person whenever it actually matters).',
+          img: 'images/consumerism/affinity-diagram.png'
+        },
+        {
+          heading: 'Insights — affinity mapping (cont.)',
+          body: 'More themes fell out of the same clustering: algorithmic feeds making advertising feel invisible, a 1-2 week "cool-off" window students use to separate real needs from passing wants, sustainability values that don\'t always survive contact with a good deal, and a steady shift toward buying for comfort and function over image.',
+          img: 'images/consumerism/affinity-diagram-2.png'
+        },
+        {
+          heading: 'Insights — affinity mapping (cont.)',
+          body: 'The remaining themes were more tactical — sales and limited-time deals as a direct trigger for purchase timing, and a preference for broad categories over granular filters when browsing. Useful context, but neither ended up as central to the final direction as "Pause Before Purchase."',
+          img: 'images/consumerism/affinity-diagram-3.png'
+        },
+        {
+          heading: 'Insights — the core insight',
+          body: 'Refining "Pause Before Purchase" got us to the real insight — Impulse by Design: students don\'t buy on impulse because they lack self-control, they buy on impulse because checkout is engineered to be frictionless. The speed that makes shopping convenient is the same speed that makes it hard to pause and reflect, so people resort to inconsistent, exhausting DIY workarounds — self-imposed waiting periods, manual price checks — to fight a system built to remove exactly that friction.'
         },
         {
           heading: 'Insights — building the persona',
@@ -670,27 +727,146 @@
           img: 'images/consumerism/journey-map-irene.png'
         },
         {
-          heading: 'Insights — the core insight',
-          body: '"Online for convenience, in-person for confidence": students default to online shopping because it\'s fast and wide-ranging, but they still cross-check quality and fit in person whenever it matters — because getting a disappointing item back in the mail feels worse than the extra trip.'
+          heading: 'Evolve your solution — direction 1',
+          body: 'One direction we explored: a save-and-decide-later app for browsing and bookmarking finds (sign-in, search, a saved place\'s detail page, profile) rather than intervening at the moment of purchase.',
+          img: 'images/consumerism/direction-1-wireframe.png'
         },
         {
-          heading: 'Ideation — from sketch to paper prototype',
-          body: 'We sketched the Purchase Decision Assistant by hand first — the three-path choice screen, then a 2-minute reflection timer for each buyer type — before touching a digital tool, so we could paper-test the pause itself: does making someone wait actually change their mind, or just annoy them?',
-          img: 'images/consumerism/lofi-sketch.png'
+          heading: 'Evolve your solution — direction 2',
+          body: 'A rougher wireframe pass exploring the same space at a lower fidelity, before we had committed to any one screen flow.',
+          img: 'images/consumerism/direction-2-wireframe.png'
         },
         {
-          heading: 'Prototype — the solution',
-          body: 'We designed a Purchase Decision Assistant — a lightweight check a shopper opts into before checkout, with three paths (Quick Assessment, Impulsive Buyer Check, Conscious Buyer Review) depending on how much reflection the purchase actually needs.',
+          heading: 'Evolve your solution — direction 3',
+          body: '"Mindful Checkout" — a 3-question assessment before starting, then a branching path for the conscious buyer versus the impulse buyer, each ending in the same 2-minute pause before the buy-or-skip decision. This direction is the one that stuck.',
+          img: 'images/consumerism/direction-3-mindful-checkout.png'
+        },
+        {
+          heading: 'Evolve your solution — direction 4',
+          body: 'We also mocked up a more polished digital pass of the same idea — the Purchase Decision Assistant — with three paths (Quick Assessment, Impulsive Buyer Check, Conscious Buyer Review) depending on how much reflection the purchase actually needs.',
           img: 'images/consumerism/purchase-decision-assistant.png'
         },
         {
-          heading: 'Prototype — iterating on pitch feedback',
+          heading: 'Evolve your solution — pitch feedback',
           body: 'Pitch feedback was that answering questions alone was too easy to click through without engaging. Based on that and our research — that given time, users often realize they don\'t actually need the item — we added a lock on checkout: a two-minute pause where the buy button stays hidden, turning the wait into a moment to reconsider rather than just a loading screen.',
           img: 'images/consumerism/solution-evolution.png'
         },
         {
+          heading: 'Prototype & test — the final prototype',
+          body: 'The prototype we actually carried into testing: hand-sketched screens for the choice flow, paired with the typed "Mindful Checkout" cards for the two assessment paths, ending in the same 2-minute pause before the buy-or-skip decision.',
+          img: 'images/consumerism/final-lofi-prototype.png'
+        },
+        {
+          heading: 'Prototype & test — user testing',
+          body: 'That prototype went through three rounds of user testing and surfaced real tension. One tester loved that the reflection questions made her slow down, and asked to photograph them to reuse before future purchases. Another pushed back hard on the framing itself: "Impulse buyer" carries a negative connotation, and people may not want to self-identify into it — better to infer the buyer type from behavior than ask someone to admit it. A third wanted the tool to close the loop over time — some kind of check-in on what was actually bought, not just a one-off assessment.'
+        },
+        {
           heading: 'My contribution',
-          body: 'I helped run and synthesize the field observations and interviews behind the "online for convenience, in-person for confidence" insight, contributed to the persona and journey map, and worked on evolving the prototype flow across iterations.'
+          body: 'I helped run and synthesize the field observations and interviews behind the "Impulse by Design" insight, contributed to the affinity mapping, persona, and journey maps, and worked on evolving the prototype flow across paper-prototype testing and pitch feedback.'
+        }
+      ]
+    },
+    anchor: {
+      eyebrow: 'UX RESEARCH · REACT · CS160',
+      title: 'Anchor — steady the day',
+      img: 'images/anchor/app-today.png',
+      role: 'Ran needfinding interviews with our team, contributed concept sketches and a hi-fi visual design direction, and helped run and synthesize the final user evaluation.',
+      link: 'https://sane24.github.io/Anchor-App/',
+      linkLabel: 'View live app ↗',
+      links: [
+        { href: 'https://sane24.github.io/Anchor-Design-Journal/', label: 'Design journal ↗' },
+        { href: 'https://github.com/Sane24/Anchor-App', label: 'GitHub repo ↗' },
+        { href: 'https://youtu.be/eFetsxByqPw', label: 'Demo video ↗' },
+        { href: 'assets/anchor-user-manual.pdf', label: 'User manual (PDF) ↗' },
+        { href: 'assets/anchor-chi-article.pdf', label: 'CHI-format article (PDF) ↗' }
+      ],
+      sections: [
+        {
+          heading: 'Observation — needfinding',
+          body: 'We observed seven students and recent graduates managing ADHD, anxiety, or depression as they began real work in their own spaces, then interviewed them about habits, stress, and workarounds. Every one of them kept plans, lists, and deadlines, and still had trouble beginning. The tools they already used organized work — none of them lowered the barrier to starting it.',
+          img: 'images/anchor/nf-thanhbinh.jpg'
+        },
+        {
+          heading: 'Observation — a call put off for a year',
+          body: 'One participant had everything ready to call her eye doctor — the number, a written script, her insurance card — but the call sat undone for a year. When we shrank the task to "just find the number," she finished in five minutes. The call itself was never the hard part; it had no scheduled start and no clear end, so it never began. Once the task had edges, it happened.',
+          imgs: ['images/anchor/nf-madison.jpg', 'images/anchor/nf-sam.jpg']
+        },
+        {
+          heading: 'Insights — what we learned',
+          body: 'Tasks without edges don\'t begin, even when someone is ready to go. Downscoping works — a five-minute version was often enough to start. Self-report feels fake: checking your own boxes killed motivation more than it built it. People manufacture their own urgency (fake deadlines, rewards behind chores), and ambiguity amplifies stress more than the work itself does. Seven POV statements became 13 how-might-we questions and 14 rough solution ideas.'
+        },
+        {
+          heading: 'Ideation — concept sketches',
+          body: 'Each of us pushed two favorite ideas in different directions — apps, browser extensions, smart glasses, AR, physical devices. The sketch that stuck: pull scattered obligations from Gmail and Calendar into one bounded plan, three tasks a day, each with a tiny first step, closed out by an evening reflection that rolls unfinished work forward.',
+          img: 'images/anchor/sk-concept-briefings.png'
+        },
+        {
+          heading: 'Ideation — other directions considered',
+          body: 'Concept A faded distracting apps to grayscale the longer you stayed on them — we passed because, as one participant put it, "it\'s not just distraction, it\'s that you don\'t want to do it." Concept C was a social accountability companion with streaks and shared goals — we passed because social pressure risks the shame and rejection sensitivity that make people abandon these systems in the first place.',
+          imgs: ['images/anchor/sk-concept-grayscale.jpg', 'images/anchor/sk-concept-buddy.jpg']
+        },
+        {
+          heading: 'Prototype — paper first',
+          body: 'We built two paper prototypes with the same functionality and opposite personalities — a stepped dashboard (one decision per screen: briefing, pick-3, focus sprint, reflection) versus a conversational co-pilot (planning as a chat thread) — then ran think-aloud sessions: plan the day, start the next action, close out and roll over.',
+          img: 'images/anchor/lofi-protoA.jpg'
+        },
+        {
+          heading: 'Prototype — what paper testing found',
+          body: 'The stepped dashboard won. Consolidation, three tasks, and the tiny first step all landed with testers. But they also flagged an ambiguous starting point, mood tracking nobody asked for, and buttons that looked tappable but weren\'t. Into the next round: open on today\'s briefing by default, make wellness tracking optional, attach times to tasks. One lesson didn\'t stick the first time — paper testers already asked for a guided first run, and the same onboarding problem resurfaced in the final evaluation.'
+        },
+        {
+          heading: 'Prototype — three visual directions',
+          body: 'Three of us independently designed the same screen in three directions and critiqued them as a group: teal-and-cream with clear next steps but no active-tab highlight; sage-and-cream, calm and the clearest at breaking tasks into steps; and a clean minimal pass that was missing the task breakdowns the concept depended on. Sage won and became Anchor\'s identity.',
+          imgs: ['images/anchor/hifi-d1b.png', 'images/anchor/hifi-d2-single.png', 'images/anchor/hifi-d3.png'],
+          frame: 'figma'
+        },
+        {
+          heading: 'Prototype — Figma prototype & critique',
+          body: 'The sage direction grew into a full clickable Figma prototype covering the daily loop — today, this week, reflection, and the focus timer; six outside participants clicked through it on their own. Five of six wanted more visual customization ("a huge deal maker or breaker"), four of six wanted custom timer durations instead of fixed +5-minute taps, and confusing copy ("Anchor 1 is next") tripped people up.',
+          imgs: ['images/anchor/figma-today.png', 'images/anchor/figma-week.png', 'images/anchor/figma-reflection.png', 'images/anchor/figma-timer.png'],
+          frame: 'figma'
+        },
+        {
+          heading: 'Prototype — the final app',
+          body: 'Anchor shipped as a React 18 single-page app on GitHub Pages, with Supabase for accounts and sync, an offline-first data layer usable without signing in, and read-only Google Calendar and Gmail access feeding the morning briefing — Gmail deliberately filtered to task-like mail so it doesn\'t add to the noise the app exists to cut. Today opens on three anchors, each with a first step already chosen. This Week pulls Gmail, Calendar, and manual tasks into one day-by-day view. A focus sprint pairs a simple timer with ambient sound so a session has a clear start and end. Reflection closes the day and automatically rolls anything unfinished into tomorrow\'s plan. Garden turns finished focus sprints into a small, ever-growing world — nothing here ever dies, so there\'s no streak to lose.',
+          grid: [
+            { src: 'images/anchor/app-briefing.png', cap: 'morning briefing · add a task, choose up to three' },
+            { src: 'images/anchor/app-today.png', cap: 'today · three anchors, one first step each' },
+            { src: 'images/anchor/app-week.png', cap: 'this week · gmail, calendar & manual tasks by day' },
+            { src: 'images/anchor/app-timer.png', cap: 'timer · focus sprints with a timer and next step' },
+            { src: 'images/anchor/app-reflection.png', cap: 'reflection · close the day, decide what rolls over' },
+            { src: 'images/anchor/app-garden.png', cap: 'garden · ten focused minutes in, the oak is a sprout' },
+            { src: 'images/anchor/app-settings.png', cap: 'settings · reminders, accents & google connections' }
+          ],
+          frame: true
+        },
+        {
+          heading: 'Prototype — accent themes',
+          body: 'Five of six Figma testers had asked for more than green — one called color choice "a huge deal maker or breaker." Sage shipped as the default, alongside Lavender, Ocean, and Terracotta, each recoloring buttons, highlights, and tabs across the whole app.',
+          grid: [
+            { src: 'images/anchor/theme-lavender.png', cap: 'lavender' },
+            { src: 'images/anchor/theme-ocean.png', cap: 'ocean' },
+            { src: 'images/anchor/theme-terracotta.png', cap: 'terracotta' }
+          ],
+          frame: true
+        },
+        {
+          heading: 'Test — user evaluation',
+          body: 'We handed the working app to five participants and read them three scenarios: plan the day, start the next action, close out the day. Planning and closing beat our 2:00 goal; starting a task didn\'t — only 2 of 5 started a focus session unaided, and Task 2 nearly doubled our target time.',
+          imgs: ['images/anchor/eval-time.png', 'images/anchor/eval-completion.png']
+        },
+        {
+          heading: 'Test — what testers said',
+          body: '"I just do what this app does in my head, so this would help reduce mental load" — a new-grad engineer managing anxiety. But our own vocabulary got in the way: "Choose an anchor" stalled people, and three of five misread "Start 5 min" as the task\'s length rather than the timer. The Garden and Reflection screens drew the warmest reactions — and were also the last things people found, sometimes only when prompted.',
+          img: 'images/anchor/eval-survey.png'
+        },
+        {
+          heading: 'What the next iteration fixes',
+          body: 'A guided first run that walks the whole daily loop once with sample content — the app already makes sense on second use, so the goal is delivering that second-run experience the first time. Familiar, action-oriented labels ("Choose 3 tasks," "Start a 5-minute focus session"). Reversible, confirmed actions: an early-finish and exit control for the timer, undo after clearing tasks, visible completion feedback. Optional sound and notifications when a sprint ends or a briefing is ready.'
+        },
+        {
+          heading: 'My contribution',
+          body: 'I ran needfinding interviews and observation sessions, cleaned and organized the raw interview data before synthesis, helped translate findings into POV statements and how-might-we questions, contributed concept sketches and one of the three hi-fi visual directions, built the focus session (timer) feature in code, and helped run and analyze the final five-participant user evaluation.'
         }
       ]
     }
@@ -731,8 +907,11 @@
       body += d.sections.map(s => `
         <div class="preview-section">
           <h4>${s.heading}</h4>
-          ${s.img ? `<div class="sec-thumb"><img src="${s.img}" alt="${s.heading}"></div>` : ''}
-          ${s.imgs ? `<div class="sec-thumb-row">${s.imgs.map(i => `<img src="${i}" alt="${s.heading}">`).join('')}</div>` : ''}
+          ${s.frame === 'figma' ? `<div class="frame-tag is-figma">Figma prototype — not real code</div>` : ''}
+          ${s.frame === true ? `<div class="frame-tag is-live">Live shipped app</div>` : ''}
+          ${s.img ? `<div class="sec-thumb${s.frame === 'figma' ? ' figma-frame' : s.frame ? ' app-frame' : ''}"><img src="${s.img}" alt="${s.heading}"></div>` : ''}
+          ${s.imgs ? `<div class="sec-thumb-row${s.frame === 'figma' ? ' figma-frame' : s.frame ? ' app-frame' : ''}">${s.imgs.map(i => `<img src="${i}" alt="${s.heading}">`).join('')}</div>` : ''}
+          ${s.grid ? `<div class="sec-thumb-grid${s.frame === 'figma' ? ' figma-frame' : s.frame ? ' app-frame' : ''}">${s.grid.map(i => `<figure><img src="${i.src || i}" alt="${i.cap || s.heading}">${i.cap ? `<figcaption>${i.cap}</figcaption>` : ''}</figure>`).join('')}</div>` : ''}
           <p>${s.body}</p>
           ${renderToolIcons(s.toolIcons)}
         </div>
@@ -754,8 +933,9 @@
       <button class="preview-close" id="previewClose">✕</button>
       <div class="preview-eyebrow mono">${d.eyebrow}</div>
       <h3>${d.title}</h3>
+      ${d.link ? `<a class="preview-link-top" href="${d.link}" target="_blank" rel="noopener"><span class="arrow-ico">▶</span>${d.linkLabel}</a>` : ''}
+      ${d.links ? `<div class="preview-links-secondary">${d.links.map(l => `<a href="${l.href}" target="_blank" rel="noopener">${l.label}</a>`).join('')}</div>` : ''}
       ${body}
-      ${d.link ? `<a class="preview-link" href="${d.link}" target="_blank" rel="noopener">${d.linkLabel}</a>` : ''}
     `;
     document.getElementById('previewClose').addEventListener('click', closePreview);
     previewOverlay.classList.add('is-open');
