@@ -171,9 +171,7 @@
   .more-work-wrap{ margin-bottom:50px; }
 
   /* ---------- about ---------- */
-  .about-grid{ display:grid; grid-template-columns:1fr 1.5fr; gap:50px; margin-bottom:60px; }
-  @media (max-width:700px){ .about-grid{ grid-template-columns:1fr; } }
-  .about-photo{ aspect-ratio:4/5; background:var(--ink); }
+  .about-grid{ display:grid; grid-template-columns:1fr; max-width:640px; gap:50px; margin-bottom:60px; }
   .about-copy p{ font-size:18px; color:var(--ink-soft); max-width:56ch; margin-bottom:16px; }
   .about-copy strong{ color:var(--ink); }
 
@@ -200,6 +198,9 @@
 
     section, footer{ opacity:0; transform:translateY(20px); transition:opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
     section.is-visible, footer.is-visible{ opacity:1; transform:translateY(0); }
+
+    #work .proj-row{ opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+    #work .proj-row.is-visible{ opacity:1; transform:translateY(0); }
   }
 
   /* ---------- cmd-k palette ---------- */
@@ -427,7 +428,6 @@
   <section id="about">
     <div class="sec-label"><h2 class="mono">ABOUT</h2></div>
     <div class="about-grid">
-      <div class="about-photo"><!-- <img src="your-photo.jpg"> --></div>
       <div class="about-copy">
         <p><strong>I'm a senior at UC Berkeley</strong> studying Cognitive Science, working toward the Berkeley Certificate in Design Innovation. I'm interested in the space between research and implementation — where a usability finding becomes a line of CSS.</p>
         <p>Outside of coursework, I write screenplays.</p>
@@ -477,6 +477,22 @@
     }, { threshold: 0.1 });
     revealTargets.forEach(el => io.observe(el));
   } else { revealTargets.forEach(el => el.classList.add('is-visible')); }
+
+  // staggered reveal for each work-list row
+  const workRows = document.querySelectorAll('#work .proj-row');
+  if ('IntersectionObserver' in window){
+    const rowIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          const i = Array.prototype.indexOf.call(workRows, e.target);
+          e.target.style.transitionDelay = (i * 60) + 'ms';
+          e.target.classList.add('is-visible');
+          rowIo.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    workRows.forEach(el => rowIo.observe(el));
+  } else { workRows.forEach(el => el.classList.add('is-visible')); }
 
   // cursor-follow preview on the work index list
   // 任何 proj-row 只要有 data-preview 且 previewData 里配了 img，这里自动生效
