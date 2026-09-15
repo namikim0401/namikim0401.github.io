@@ -164,8 +164,13 @@
 
   /* ---------- skills ---------- */
   .skills-wrap{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:50px; }
-  .skill-pill{ font-size:13px; font-weight:700; padding:9px 16px; border:1.5px solid var(--ink); border-radius:20px; }
+  .skill-pill{ font-size:13px; font-weight:700; padding:9px 16px; border:1.5px solid var(--ink); border-radius:20px; cursor:pointer; user-select:none; transition:background .15s ease, color .15s ease, border-color .15s ease; }
   .skill-pill:hover{ background:var(--ink); color:var(--paper); }
+  .skill-pill.is-active{ background:var(--bolt); border-color:var(--bolt); color:var(--paper); }
+  .skills-hint{ font-size:12px; color:var(--ink-soft); margin:-10px 0 20px; }
+  #work .proj-row{ transition: opacity .3s ease, background .2s ease; }
+  #work .proj-row.is-dimmed{ opacity:.3; }
+  #work .proj-row.is-match{ background:rgba(255,59,31,.06); }
 
   /* ---------- additional work ---------- */
   .more-work-wrap{ margin-bottom:50px; }
@@ -345,35 +350,35 @@
     </div>
     <div class="work-list">
 
-      <a class="proj-row" data-img="anchor-thumb.jpg" data-preview="anchor" href="#">
+      <a class="proj-row" data-img="anchor-thumb.jpg" data-preview="anchor" href="#" data-skills="figma,html / css,javascript,react,design systems,usability testing">
         <span class="num">01</span>
         <span class="title">Anchor — Steady the Day</span>
         <span class="tags"><span>USER INTERFACE DESIGN AND DEVELOPMENT</span></span>
         <span class="arrow">→</span>
       </a>
 
-      <a class="proj-row" data-img="munch-thumb.jpg" data-preview="munch" href="#">
+      <a class="proj-row" data-img="munch-thumb.jpg" data-preview="munch" href="#" data-skills="react native,javascript">
         <span class="num">02</span>
         <span class="title">Munch</span>
         <span class="tags"><span>REACT NATIVE</span><span>TYPESCRIPT</span></span>
         <span class="arrow">→</span>
       </a>
 
-      <a class="proj-row" data-img="nuo-thumb.jpg" data-preview="nuo" href="#">
+      <a class="proj-row" data-img="nuo-thumb.jpg" data-preview="nuo" href="#" data-skills="figma">
         <span class="num">03</span>
         <span class="title">Nuo — Futurist Lamp</span>
         <span class="tags"><span>PRODUCT DESIGN</span></span>
         <span class="arrow">→</span>
       </a>
 
-      <a class="proj-row" data-img="dots-thumb.jpg" data-preview="dots" href="#">
+      <a class="proj-row" data-img="dots-thumb.jpg" data-preview="dots" href="#" data-skills="figma,usability testing,thematic coding">
         <span class="num">04</span>
         <span class="title">Dots</span>
         <span class="tags"><span>UX RESEARCH</span></span>
         <span class="arrow">→</span>
       </a>
 
-      <a class="proj-row" data-img="consumerism-thumb.jpg" data-preview="consumerism" href="#">
+      <a class="proj-row" data-img="consumerism-thumb.jpg" data-preview="consumerism" href="#" data-skills="figma,usability testing,thematic coding">
         <span class="num">05</span>
         <span class="title">Mindful Checkout</span>
         <span class="tags"><span>UX RESEARCH</span></span>
@@ -399,19 +404,20 @@
   <!-- ============ SKILLS ============ -->
   <section id="skills">
     <div class="sec-label"><h2 class="mono">SKILLS &amp; TOOLS</h2></div>
+    <p class="skills-hint mono">Click a skill to see which projects used it.</p>
     <div class="skills-wrap">
-      <span class="skill-pill">Figma</span>
-      <span class="skill-pill">HTML / CSS</span>
-      <span class="skill-pill">JavaScript</span>
-      <span class="skill-pill">React</span>
-      <span class="skill-pill">React Native</span>
-      <span class="skill-pill">Node.js</span>
-      <span class="skill-pill">Express</span>
-      <span class="skill-pill">MongoDB</span>
-      <span class="skill-pill">Chart.js</span>
-      <span class="skill-pill">Usability Testing</span>
-      <span class="skill-pill">Thematic Coding</span>
-      <span class="skill-pill">Design Systems</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Figma</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">HTML / CSS</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">JavaScript</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">React</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">React Native</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Node.js</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Express</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">MongoDB</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Chart.js</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Usability Testing</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Thematic Coding</span>
+      <span class="skill-pill" role="button" tabindex="0" aria-pressed="false">Design Systems</span>
     </div>
   </section>
 
@@ -493,6 +499,40 @@
     }, { threshold: 0.15 });
     workRows.forEach(el => rowIo.observe(el));
   } else { workRows.forEach(el => el.classList.add('is-visible')); }
+
+  // clicking a skill pill highlights the projects that used it
+  const skillPills = document.querySelectorAll('.skill-pill');
+  let activeSkill = null;
+
+  function applySkillFilter(){
+    skillPills.forEach(p => {
+      const isActive = activeSkill && p.textContent.trim().toLowerCase() === activeSkill;
+      p.classList.toggle('is-active', isActive);
+      p.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+    workRows.forEach(row => {
+      const skills = (row.dataset.skills || '').split(',').map(s => s.trim());
+      const matches = activeSkill && skills.includes(activeSkill);
+      row.classList.toggle('is-dimmed', !!activeSkill && !matches);
+      row.classList.toggle('is-match', !!matches);
+    });
+  }
+
+  function toggleSkill(pill){
+    const skill = pill.textContent.trim().toLowerCase();
+    activeSkill = (activeSkill === skill) ? null : skill;
+    applySkillFilter();
+    if (activeSkill){
+      document.getElementById('work').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  skillPills.forEach(pill => {
+    pill.addEventListener('click', () => toggleSkill(pill));
+    pill.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSkill(pill); }
+    });
+  });
 
   // cursor-follow preview on the work index list
   // 任何 proj-row 只要有 data-preview 且 previewData 里配了 img，这里自动生效
